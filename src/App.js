@@ -1,9 +1,13 @@
 import {useState}from 'react'
 import './App.css';
+
 const currentDate = new Date();
+const currentYear = currentDate.getFullYear();
+const currentMonth = currentDate.getMonth() + 1; // Note: JavaScript months are zero-based, so we add 1
 const currentDay = currentDate.getDate();
 
 function App() {
+  const person={name:'Subith'}
   const [todos,setTodos]=useState([]);
   const [todo,setTodo]=useState('');
   return (
@@ -15,10 +19,10 @@ function App() {
     <div className="subHeading">
       <br />
  
-      <h2>Whoop, it's {currentDay}  </h2>
+      <h2>Hello {person.name}, it's {currentDay}-{currentMonth}-{currentYear} </h2>
     </div>
     <div className="input">
-      <input value={todo} onChange={(e)=>setTodo(e.target.value)}  type="text" placeholder="🖊️ Add item..." />
+      <input value={todo} onChange={(e)=>setTodo(e.target.value)}  type="text" placeholder="🖊️ Add item..."  />
       <i onClick={()=>setTodos([...todos,{id:Date.now(), text: todo,status:false}])} className="fas fa-plus"></i>
     </div>
     <div className="todos">
@@ -66,14 +70,15 @@ return (
   
   );
 }
-
 export default App;
 
 
 
 
 
-// rempving code  
+
+
+// rempving code   
 
 {/* <i id={obj.id} className="fas fa-times" onClick={(e)=>{
               let index= toDos.findIndex(obj=>{return obj.id==e.target.id})
