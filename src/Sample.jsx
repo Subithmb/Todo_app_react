@@ -161,19 +161,80 @@
 
 //   ........................
 
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
+// import './App.css';
+
+//     function Sample() {
+//         const [todoList,setTodoList]=useState([]);
+//         const [newTask,setNewTask]=useState('');
+//         const handleChange=(event)=>{
+//             setNewTask(event.target.value);
+             
+//         }
+//         const addTask=()=>{  
+//             const task={
+//                 id: todoList.length === 0 ? 1 : todoList[todoList.length-1].id+1,
+//                 taskName:newTask
+//             }
+//         setTodoList([...todoList,task]);  
+//         }
+
+//         const deleteTask =(id)=>{
+           
+//             setTodoList(todoList.filter((task)=>task.id!==id ))
+//         }
+//         return(
+//             <div className='APP'>
+//                 <div className='addTask'>
+//                 <input type="text" onChange={handleChange} />
+//                 <button onClick={addTask}>ADD TASK</button>
+//                 </div>
+//                 <div className='list'>
+//                     {todoList.map((task)=>{
+//                         return (
+//                             <div className='task'>
+
+//                                 <h1>{task.taskName}</h1>
+//                                 <button onClick={()=>deleteTask(task.id)} > x </button>
+//                             </div>
+//                         )
+//                     })}
+//                 </div>
+                
+//             </div>
+//         )
+//     }
+
+//     export default Sample;
+
+
+
+
+import React, { useState,useRef } from 'react';
 import './App.css';
+const currentDate = new Date();
+const currentYear = currentDate.getFullYear();
+const currentMonth = currentDate.getMonth() + 1; // Note: JavaScript months are zero-based, so we add 1
+const currentDay = currentDate.getDate();
 
     function Sample() {
+        const person={name:'Subith'}
+        const inputRef=useRef(null)
         const [todoList,setTodoList]=useState([]);
         const [newTask,setNewTask]=useState('');
-        const handleChange=(event)=>{
-            setNewTask(event.target.value);
+        // const handleChange=(event)=>{
+        //     setNewTask(event.target.value);
              
-        }
-        const addTask=()=>{  
+        // }
+        const addTask=()=>{ 
+            inputRef.current.focus(); 
+           
+            setNewTask(inputRef.current.value)
+            inputRef.current.value='';
             const task={
-                id: todoList.length === 0 ? 1 : todoList[todoList.length-1].id+1,
+
+                id:todoList.index ,
+                // todoList.length === 0 ? 1 : todoList[todoList.length-1].id+1
                 taskName:newTask
             }
         setTodoList([...todoList,task]);  
@@ -184,21 +245,24 @@ import './App.css';
             setTodoList(todoList.filter((task)=>task.id!==id ))
         }
         return(
-            <div className='APP'>
+         <div className='APP'>
+            <div  className='header'>
+            <h1 >ToDo List</h1>
+             <h2>Hello {person.name}, it's {currentDay}-{currentMonth}-{currentYear} </h2>
+            </div>
+               
                 <div className='addTask'>
-                <input type="text" onChange={handleChange} />
-                <button onClick={addTask}>ADD TASK</button>
+                <input style={{width:'200px',height:'30px',borderBlockColor:'white'}} type="text" ref={inputRef} />
+                <button className="btn_btn" onClick={addTask}>ADD TASK</button>
                 </div>
                 <div className='list'>
                     {todoList.map((task)=>{
                         return (
                             <div className='task'>
-
                                 <h1>{task.taskName}</h1>
                                 <button onClick={()=>deleteTask(task.id)} > x </button>
                             </div>
-                        )
-                    })}
+                        )})}
                 </div>
                 
             </div>
