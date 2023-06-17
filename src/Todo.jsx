@@ -58,7 +58,7 @@
 {/* ....................check Box................................. */}
 
                 <div className="left">
-                    { !obj.status && <input onChange={(e)=>{
+                    { !obj.status && <input style={{backgroundColor:'white'}} onChange={(e)=>{
                         
                         setTodos(todos.filter(obj2=>{
                         if(obj2.id===obj.id){
@@ -70,7 +70,7 @@
                     }}
                     value={obj.status} type="checkbox" name="" id="" />}
 
-                    <p className={obj.status ? 'textCutting':'class'}>{obj.text}</p>
+                    <p style={{color:'black',fontSize:'20px'}} className={obj.status ? 'textCutting':'class'}>{obj.text}</p>
 
                 </div>
 
